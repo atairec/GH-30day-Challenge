@@ -1,2 +1,2 @@
 # GH 30 days challenge
-Hello World. Day 1 of exploring GitHub
+This is a 30 day Java coding challenge. 
