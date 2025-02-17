@@ -1,0 +1,72 @@
+More advanced Banks Account 
+
+import java.util.Scanner;
+
+class BankAccount {
+    private String accountHolder;
+    private double balance;
+    private String accountNumber;
+
+    // Constructor
+    public BankAccount(String accountHolder, String accountNumber, double initialBalance) {
+        this.accountHolder = accountHolder;
+        this.accountNumber = accountNumber;
+        this.balance = initialBalance;
+    }
+
+    // Method to deposit money
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: $" + amount);
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
+    }
+
+    // Method to withdraw money
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: $" + amount);
+        } else {
+            System.out.println("Invalid withdrawal amount or insufficient funds.");
+        }
+    }
+
+    // Method to check balance
+    public void checkBalance() {
+        System.out.println("Account Holder: " + accountHolder);
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Current Balance: $" + balance);
+    }
+
+    // Method to transfer money
+    public void transfer(BankAccount recipient, double amount) {
+        if (amount > 0 && amount <= balance) {
+            this.withdraw(amount);
+            recipient.deposit(amount);
+            System.out.println("Transferred: $" + amount + " to " + recipient.accountHolder);
+        } else {
+            System.out.println("Invalid transfer amount or insufficient funds.");
+        }
+    }
+
+    // Main method to demonstrate functionality
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        BankAccount account1 = new BankAccount("John Doe", "123456789", 1000.0);
+        BankAccount account2 = new BankAccount("Jane Smith", "987654321", 1500.0);
+        
+        account1.checkBalance();
+        account1.deposit(500);
+        account1.withdraw(300);
+        account1.checkBalance();
+        
+        account1.transfer(account2, 200);
+        account1.checkBalance();
+        account2.checkBalance();
+        
+        scanner.close();
+    }
+}
